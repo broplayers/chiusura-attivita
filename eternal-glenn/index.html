@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiusura Attività</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Chiusura Attività</h1>
+            <div class="header-inputs">
+                <div class="form-group half">
+                    <label for="wr">WR (Oggetto)</label>
+                    <input type="text" id="wr" name="wr" placeholder="Es. 123456" required>
+                </div>
+                <div class="form-group half">
+                    <label for="phone">Telefono (Oggetto)</label>
+                    <input type="text" id="phone" name="phone" placeholder="Es. 08014288774" required>
+                </div>
+            </div>
+        </header>
+
+        <form id="closureForm">
+            <!-- Cavetto -->
+            <div class="form-group">
+                <label for="cavetto">Cavetto (es. esterno 25mt)</label>
+                <input type="text" id="cavetto" name="cavetto" placeholder="Es. esterno 25mt" required>
+                <small class="hint">Verrà aggiunto automaticamente "Posato cavetto monofibra..."</small>
+            </div>
+
+            <!-- Verticale Checkbox -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="verticale" name="verticale">
+                <label for="verticale">Verticale</label>
+            </div>
+
+            <!-- Verticale Color Field (Hidden by default) -->
+            <div id="verticale_field" style="display: none;">
+                <div class="form-group">
+                    <label for="colore">Metri e Colore</label>
+                    <input type="text" id="colore" name="colore" placeholder="Es. mt 15 rosso">
+                </div>
+            </div>
+
+            <!-- ONT -->
+            <div class="form-group">
+                <label for="ont">ONT</label>
+                <input type="text" id="ont" name="ont" placeholder="Es. 786030">
+            </div>
+
+            <!-- Collegamento Split -->
+            <div class="form-group-row">
+                <div class="form-group third">
+                    <label for="arl">ARL</label>
+                    <input type="text" id="arl" name="arl" placeholder="Es. 17" required>
+                </div>
+                <div class="form-group third">
+                    <label for="quartina">Quartina</label>
+                    <input type="text" id="quartina" name="quartina" placeholder="Es. 57-3" required>
+                </div>
+                <div class="form-group third">
+                    <label for="ss">SS</label>
+                    <input type="text" id="ss" name="ss" placeholder="Es. 3-3" required>
+                </div>
+            </div>
+
+            <!-- Modem Checkbox -->
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="modem_installed" name="modem_installed">
+                <label for="modem_installed">Modem installato</label>
+            </div>
+
+            <!-- Modem Fields (Hidden by default) -->
+            <div id="modem_fields" style="display: none;">
+                <div class="form-group">
+                    <label for="modem_model">Modello Modem</label>
+                    <input type="text" id="modem_model" name="modem_model" placeholder="Es. tim hub pro 785632">
+                </div>
+                <div class="form-group">
+                    <label for="modem_serial">Seriale Modem</label>
+                    <div style="display: flex; gap: 10px; align-items: flex-start;">
+                        <textarea id="modem_serial" name="modem_serial" rows="2" placeholder="Es. %r09178563..."
+                            style="flex: 1;"></textarea>
+                        <button type="button" id="scan_barcode_btn" class="btn-scan" title="Scansiona codice a barre">
+                            📷
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TimVisionBox Checkbox (inside modem fields) -->
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="timvisionbox_installed" name="timvisionbox_installed">
+                    <label for="timvisionbox_installed">TimVisionBox</label>
+                </div>
+
+                <!-- TimVisionBox Serial Field (Hidden by default) -->
+                <div id="timvisionbox_field" style="display: none;">
+                    <div class="form-group">
+                        <label for="timvisionbox_serial">Seriale TimVisionBox</label>
+                        <div style="display: flex; gap: 10px; align-items: flex-start;">
+                            <textarea id="timvisionbox_serial" name="timvisionbox_serial" rows="2"
+                                placeholder="Es. %r09178563..." style="flex: 1;"></textarea>
+                            <button type="button" id="scan_timvision_btn" class="btn-scan"
+                                title="Scansiona codice a barre">
+                                📷
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Presa -->
+            <div class="form-group">
+                <label for="presa">Numero presa</label>
+                <div style="display: flex; gap: 10px; align-items: flex-start;">
+                    <input type="text" id="presa" name="presa" placeholder="Es. 88AAD4KS" style="flex: 1;">
+                    <button type="button" id="scan_presa_btn" class="btn-scan" title="Scansiona codice a barre">
+                        📷
+                    </button>
+                </div>
+            </div>
+
+            <!-- Prove -->
+            <div class="form-group">
+                <label for="prove">Prove con</label>
+                <input type="text" id="prove" name="prove" placeholder="Es. MARIO ROSSI">
+            </div>
+
+            <!-- Ditta & Tecnico with Persistence -->
+            <div class="form-group">
+                <label for="ditta">Ditta esecutrice</label>
+                <input type="text" id="ditta" name="ditta" placeholder="Inserisci ditta">
+            </div>
+            <div class="form-group">
+                <label for="tecnico">Nome del tecnico</label>
+                <input type="text" id="tecnico" name="tecnico" placeholder="Inserisci nome tecnico">
+            </div>
+
+            <!-- Save Ditta Button -->
+            <div class="form-group">
+                <button type="button" id="toggle_save_ditta" class="btn-secondary">
+                    Salva Ditta e Tecnico <span id="ditta_check" style="display:none">✅</span>
+                </button>
+            </div>
+
+            <!-- Collaudo -->
+            <div class="form-group">
+                <label for="collaudo">Codice collaudo</label>
+                <input type="text" id="collaudo" name="collaudo" placeholder="Es. tk202511260070332475">
+            </div>
+
+            <!-- Piano & Interno Split -->
+            <div class="form-group-row">
+                <div class="form-group half">
+                    <label for="piano">Piano</label>
+                    <input type="text" id="piano" name="piano" placeholder="Es. P1">
+                </div>
+                <div class="form-group half">
+                    <label for="interno">Interno</label>
+                    <input type="text" id="interno" name="interno" placeholder="Es. 1">
+                </div>
+            </div>
+
+            <!-- Email Recipients -->
+            <div class="settings-section">
+                <h3>Impostazioni Email</h3>
+                <div class="form-group">
+                    <label for="email_recipients">Indirizzi destinatari (separati da virgola)</label>
+                    <textarea id="email_recipients" name="email_recipients" rows="2"
+                        placeholder="email1@example.com, email2@example.com"></textarea>
+                    <button type="button" id="save_emails_btn" class="btn-secondary">
+                        Salva Indirizzi Email <span id="email_check" style="display:none">✅</span>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Genera Email</button>
+        </form>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <button type="button" id="clear_all_btn" class="btn-danger-small">
+                🗑️ Cancella Tutto
+            </button>
+        </div>
+
+        <footer
+            style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #334155; color: #64748b; font-size: 0.85rem;">
+            Creato da <strong>Broplayer</strong>
+        </footer>
+
+        <div style="text-align: center; margin-top: 15px; color: #64748b; font-size: 0.8rem;">
+            👁️ Visite totali: <strong id="visit_counter">0</strong>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
